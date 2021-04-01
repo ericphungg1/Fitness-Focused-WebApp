@@ -14,11 +14,12 @@ Nitharshni Chennai Kumaravel z5255563
 # Introduction
 
 SmartBite is a fitness and diet application that aims to address the following problems:
-- The majority of current applications incur premium costs or ongoing subscriptions for most features.
-- There are a few applications which enrich the user experience by providing motivation and incentives.
-- Many applications lack community and behavioural support for users.
+- The majority of current fitness/diet applications do not possess gamification wherein users are presented with leaderboards and points correlating with their achievements. 
+- There are a few fitness/diet applications which enrich the user experience by providing motivation and incentives.
+- Many fitness/diet applications lack community and behavioural support for users.
 
 # Prototype Implementation
 
-Deliverable One: Deliverable One contains SmartBite's problem statement, low-fidelity and high-fidelity prototypes. 
+Deliverable One: Deliverable One contains SmartBite's problem statement, low-fidelity and high-fidelity prototypes.
+Deliverable Two: Deliverable Two contains SmartBite's software architecture and UML diagrams. 
 
