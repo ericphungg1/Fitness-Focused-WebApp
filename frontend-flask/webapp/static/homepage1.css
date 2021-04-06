@@ -1738,33 +1738,3 @@ body {
   text-transform:none;
 }
 
-#ulog_img {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:0px;
-  width:23px;
-  height:27px;
-}
-#ulog {
-  border-width:0px;
-  position:absolute;
-  left:810px;
-  top:62px;
-  width:23px;
-  height:27px;
-  display:flex;
-}
-#ulog .text {
-  position:absolute;
-  align-self:center;
-  padding:2px 2px 2px 2px;
-  box-sizing:border-box;
-  width:100%;
-}
-#ulog_text {
-  border-width:0px;
-  word-wrap:break-word;
-  text-transform:none;
-  visibility:hidden;
-}
