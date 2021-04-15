@@ -299,9 +299,11 @@ body {
   width:100%;
 }
 #u26_text {
+  position:absolute;
   border-width:0px;
   white-space:nowrap;
   text-transform:none;
+    bottom: -17px;
 }
 #u27 {
   border-width:0px;
@@ -404,6 +406,7 @@ body {
   font-family:'Roboto', sans-serif;
   font-weight:400;
   font-style:normal;
+  bottom: 10px;
 }
 #u31 {
   border-width:0px;
@@ -416,6 +419,7 @@ body {
   font-family:'Roboto', sans-serif;
   font-weight:400;
   font-style:normal;
+   bottom: 10px;
 }
 #u31 .text {
   position:absolute;
@@ -423,11 +427,14 @@ body {
   padding:0px 0px 0px 0px;
   box-sizing:border-box;
   width:100%;
+   bottom: -10px;
 }
 #u31_text {
+  position:absolute;
   border-width:0px;
   white-space:nowrap;
   text-transform:none;
+   bottom: -10px;
 }
 #u32_img {
   border-width:0px;
