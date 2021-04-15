@@ -115,9 +115,69 @@ def registeruser(userid, age, height, gender, currentweight, goalweight):
     conn.commit()
     conn.close()
 
+#login user
+def login(email, password):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the matching password of the email
+    action = "SELECT user.email from user where user.email='{}'".format(email)
+    cur.execute(action)
+
+    #if email does not exist
+    if not cur.fetchall():
+        print(email)
+        return 'Email does not exist'
+
+    #get the matching password of the email
+    action = "SELECT user.password from user where user.email='{}'".format(email)
+    cur.execute(action)
+
+    #check if passwords match
+    if (cur.fetchall()[0][0] == password):
+        return 'Login successful'
+    else:
+        return 'Incorrect password'
+    conn.close()
+
+def settings_updateemail(newemail, userid):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #enter in other user details
+    action = "UPDATE user SET email ='{}' where userid = {}".format(newemail, userid)
+    cur.execute(action)
+
+    action = "SELECT * from user;"
+    cur.execute(action)
+
+    #prints the tuples
+    print(cur.fetchall())
+    conn.commit()
+    conn.close()
+
+def settings_updatepassword(newpassword, userid):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #enter in other user details
+    action = "UPDATE user SET password ='{}' where userid = {}".format(newpassword, userid)
+    cur.execute(action)
+
+    action = "SELECT * from user;"
+    cur.execute(action)
+
+    #prints the tuples
+    print(cur.fetchall())
+    conn.commit()
+    conn.close()
+
 if __name__== "__main__":
     main()
-    newuser('John', 'Smith', 'email', 'password')
-    newuser('Emily', 'Jane', 'email', 'password')
+    newuser('John', 'Smith', 'john@email.com', 'password')
+    newuser('Emily', 'Jane', 'emily@email.com', 'password')
     registeruser(1, 20, 153, 'Female', 50, 70)
+    settings_updateemail('emilyjane@email.com', 1)
+    settings_updateemail('newpassword', 1)
+    print(login('john@email.com', 'password'))
     os.remove("smartbite.db")
