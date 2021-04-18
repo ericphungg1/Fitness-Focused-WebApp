@@ -30,7 +30,7 @@ def main():
                                         consumptionid integer PRIMARY KEY,
                                         day text,
                                         caloriegoal integer,
-                                        clorieconsumed integer,
+                                        calorieconsumed integer,
                                         watergoal integer,
                                         waterconsumed integer,
                                         user_id integer,
@@ -97,6 +97,30 @@ def newuser(firstname, lastname, email, password):
     action = "INSERT INTO user (userid, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?)"
     cur.execute(action, (userid, firstname, lastname, email, password))
 
+    #generate timestamp
+    now = datetime.now()
+    timestamp_string = now.strftime("%d/%m/%Y")
+
+    action = "SELECT * from consumption where day = {} and user_id = {}".format(timestamp_string, userid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    if not data:
+        #generate consumption id
+        action = "SELECT MAX(consumptionid) from consumption"
+        cur.execute(action)
+        data = cur.fetchall()
+
+        ##if there are no values
+        if (data[0][0] == None):
+            consumptionid = 0
+        else:
+            consumptionid = data[0][0] + 1
+
+        #enter in a new consumption id and date
+        action = "INSERT INTO consumption (consumptionid, day, caloriegoal, calorieconsumed, watergoal, waterconsumed, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        cur.execute(action, (consumptionid, timestamp_string, 2500, 0, 8, 0, userid))
+
     #now check if data is entered
     action = "SELECT user.userid, user.firstname, user.lastname from user;"
     cur.execute(action)
@@ -147,10 +171,128 @@ def login(email, password):
     if (data[0][0] == password):
         global activeUserid
         activeUserid = data[0][1]
+        #check if the consumption table for this day and user exists
+        #generate timestamp
+    now = datetime.now()
+    timestamp_string = now.strftime("%d/%m/%Y")
+
+    action = "SELECT * from consumption where day = {} and user_id = {}".format(timestamp_string, activeUserid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    if not data:
+        #generate consumption id
+        action = "SELECT MAX(consumptionid) from consumption"
+        cur.execute(action)
+        data = cur.fetchall()
+
+        ##if there are no values
+        if (data[0][0] == None):
+            consumptionid = 0
+        else:
+            consumptionid = data[0][0] + 1
+
+        #enter in a new consumption id and date
+        action = "INSERT INTO consumption (consumptionid, day, caloriegoal, calorieconsumed, watergoal, waterconsumed, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        cur.execute(action, (consumptionid, timestamp_string, 2500, 0, 8, 0, activeUserid))
         return 'Login successful'
     else:
         return 'Incorrect password'
     conn.close()
+
+#given a userid, get the weight left
+def getweightleft(userid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the currentweight, goalweight
+    action = "SELECT user.currentweight, user.goalweight from user where user.userid = {}".format(userid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    currentweight = data[0][0]
+    goalweight = data[0][1]
+    conn.close()
+
+    return abs(currentweight - goalweight)
+
+def addwater(userid, glasses):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #generate timestamp
+    now = datetime.now()
+    timestamp_string = now.strftime("%d/%m/%Y")
+
+    #enter in other user details
+    action = "UPDATE consumption SET waterconsumed ={} where user_id = {} and day = '{}'".format(glasses, userid, timestamp_string)
+    cur.execute(action)
+
+    action = "SELECT * from consumption;"
+    cur.execute(action)
+
+    #prints the tuples
+    print(cur.fetchall())
+    conn.commit()
+    conn.close()
+
+#given a userid, get water left
+def getwater(userid):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the currentweight, goalweight
+    action = "SELECT watergoal, waterconsumed from consumption where user_id = {}".format(userid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    watergoal = data[0][0]
+    waterconsumed = data[0][1]
+    conn.close()
+
+    if waterconsumed > 8:
+        return 0
+    else:
+        return (watergoal - waterconsumed)
+
+def addcalories(userid, calories):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #generate timestamp
+    now = datetime.now()
+    timestamp_string = now.strftime("%d/%m/%Y")
+
+    #enter in other user details
+    action = "UPDATE consumption SET calorieconsumed ={} where user_id = {} and day = '{}'".format(calories, userid, timestamp_string)
+    cur.execute(action)
+    conn.commit()
+    action = "SELECT * from consumption;"
+    cur.execute(action)
+
+    #prints the tuples
+    print(cur.fetchall())
+    conn.close()
+
+def getcalories(userid):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the currentweight, goalweight
+    action = "SELECT caloriegoal, calorieconsumed from consumption where consumption.user_id = {}".format(userid)
+    cur.execute(action)
+    data = cur.fetchall()
+    caloriegoal = data[0][0]
+    calorieconsumed = data[0][1]
+    conn.close()
+
+    if calorieconsumed > 2500:
+        return 0
+    else:
+        return (caloriegoal - calorieconsumed)
+
+#def editprofile():
 
 def create_post(title, content, authorid):
 
@@ -206,7 +348,7 @@ def edit_post(postid, newcontent, authorid):
     action = "UPDATE posts SET content ='{}', time ='{}' where authorid = {}".format(newcontent, timestamp_string, authorid)
     cur.execute(action)
 
-    #print 
+    #print
     action = "SELECT * from posts where posts.authorid='{}'".format(authorid)
     cur.execute(action)
     print(cur.fetchall())
@@ -214,6 +356,92 @@ def edit_post(postid, newcontent, authorid):
     conn.commit()
     conn.close()
 
+
+def createcomment(authorid, content, postid):
+
+    #generate new commentid
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #generate user id
+    action = "SELECT MAX(commentid) from comments"
+    cur.execute(action)
+    data = cur.fetchall()
+
+    ##if there are no values
+    if (data[0][0] == None):
+        commentid = 0
+    else:
+        commentid = data[0][0] + 1
+
+    now = datetime.now()
+    timestamp_string = now.strftime("%d/%m/%Y %H:%M")
+
+    #insert into comments table
+    action = "INSERT INTO comments (commentid, authorid, content, time, post_id) VALUES (?, ?, ?, ?, ?)"
+    cur.execute(action, (commentid, authorid, content, timestamp_string, postid))
+
+    action = "SELECT * from comments;"
+    cur.execute(action)
+
+    #prints the tuples
+    print(cur.fetchall())
+    conn.commit()
+    conn.close()
+
+def editcomment(authorid, newcomment, commentid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #check if the given id is same as author
+    action = "SELECT authorid from comments where commentid={}".format(commentid)
+    cur.execute(action)
+
+    commentauthor = cur.fetchall()[0][0]
+    if (commentauthor != authorid):
+        print("You cannot edit post")
+
+    #generate new timestamp
+    now = datetime.now()
+    timestamp_string = now.strftime("%d/%m/%Y %H:%M")
+
+    #update timestamp
+    action = "UPDATE comments SET content ='{}', time ='{}' where authorid = {}".format(newcomment, timestamp_string, authorid)
+    cur.execute(action)
+
+    #print
+    action = "SELECT * from comments"
+    cur.execute(action)
+    print(cur.fetchall())
+
+    conn.commit()
+    conn.close()
+
+def deletecomment(authorid, commentid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #check if the given id is same as author
+    action = "SELECT authorid from comments where commentid={}".format(commentid)
+    cur.execute(action)
+
+    commentauthor = cur.fetchall()[0][0]
+    if (commentauthor != authorid):
+        print("You cannot delete post")
+
+    #update timestamp
+    action = "DELETE from comments where commentid = {}".format(commentid)
+    cur.execute(action)
+
+    #print
+    action = "SELECT * from comments"
+    cur.execute(action)
+    print(cur.fetchall())
+
+    conn.commit()
+    conn.close()
 
 def settings_updateemail(newemail, userid):
     conn = sqlite3.connect('smartbite.db')
@@ -253,12 +481,22 @@ def logout(userid):
 
 if __name__== "__main__":
     main()
-    newuser('John', 'Smith', 'john@email.com', 'password')
+    #newuser('John', 'Smith', 'john@email.com', 'password')
     newuser('Emily', 'Jane', 'emily@email.com', 'password')
-    registeruser(1, 20, 153, 'Female', 50, 70)
-    settings_updateemail('emilyjane@email.com', 1)
-    settings_updateemail('newpassword', 1)
-    print(login('john@email.com', 'password'))
+    registeruser(0, 20, 153, 'Female', 50, 70)
+    #settings_updateemail('emilyjane@email.com', 1)
+    #settings_updateemail('newpassword', 1)
+    #print(login('john@email.com', 'password'))
+    #addcalories(0, 1200)
+    #addwater(0, 5)
+    #print(getcalories(1))
     create_post('hello', 'hello', 0)
-    edit_post(0, "bye", 0)
+    createcomment(0, "nice", 0)
+    createcomment(0, "WOW", 0)
+    deletecomment(0, 0)
+    #editcomment(0, "hello", 0)
+    #edit_post(0, "bye", 0)
+    #print(getweightleft(1))
+    #print(getwater(0))
+    #print(getcalories(0))
     os.remove("smartbite.db")
