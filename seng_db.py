@@ -152,6 +152,84 @@ def login(email, password):
         return 'Incorrect password'
     conn.close()
 
+def view_posts():
+
+    #generate postid
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #print 
+    action = "SELECT * from posts"
+    cur.execute(action)
+    print(cur.fetchall())
+
+    conn.commit()
+    conn.close()
+
+def delete_posts(post_id, authorid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #check if the given id is same as author
+    action = "SELECT posts.authorid from posts where posts.postid={}".format(postid)
+    cur.execute(action)
+
+    postauthor = cur.fetchall()[0][0]
+    if (postauthor != authorid):
+        print("You cannot delete this post")
+
+    action = "DELETE * from posts where posts.postid='{}'".format(postid)
+    action = "DELETE * from comments where comments.postid='{}'".format(postid)
+
+    cur.execute(action)
+    conn.commit()
+    conn.close()
+
+def like_post(postid, userid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #check if the given id is same as author
+    action = "SELECT posts.likes from posts where posts.postid={}".format(postid)
+    cur.execute(action)
+
+    likes = cur.fetchall()[0][0]
+    on = 1
+    off = 0
+    if (likes != 1):
+        action = "UPDATE posts SET like = '{}'".format(on)
+        cur.execute(action)
+        # Do you need to SELECT the dislike attribute before updating?
+        action = "UPDATE posts SET dislike = '{}'".format(off) 
+        cur.execute(action)
+
+    conn.commit()
+    conn.close()
+
+def dislike_post(postid, userid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #check if the given id is same as author
+    action = "SELECT posts.dislikes from posts where posts.postid={}".format(postid)
+    cur.execute(action)
+
+    likes = cur.fetchall()[0][0]
+    on = 1
+    off = 0
+    if (likes != 1):
+        action = "UPDATE posts SET dislike = '{}'".format(on)
+        cur.execute(action)
+        # Do you need to SELECT the like attribute before updating?
+        action = "UPDATE posts SET like = '{}'".format(off) 
+        cur.execute(action)
+
+    conn.commit()
+    conn.close()
+
 def create_post(title, content, authorid):
 
     #generate postid
