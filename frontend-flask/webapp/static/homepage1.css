@@ -653,6 +653,41 @@ body {
   width:544px;
   height:236px;
 }
+.progress {
+  border-width:0px;
+  position:absolute;
+    left:400px;
+  top:300px;
+  width:300px;
+  height:20px;
+}
+
+.meter { 
+  position:absolute;
+  left:380px;
+  top:300px;
+  width:300px;
+  height:20px;
+  background: #F3F3F3;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #A4CDBA;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
 #u16 {
   border-width:0px;
   position:absolute;
@@ -765,9 +800,9 @@ body {
 #u20 {
   border-width:0px;
   position:absolute;
-  left:503px;
-  top:373px;
-  width:116px;
+  left:380px;
+  top:350px;
+  width:300px;
   height:59px;
   display:flex;
   color:#555555;
@@ -1293,9 +1328,9 @@ body {
 #u36 {
   border-width:0px;
   position:absolute;
-  left:436px;
+  left:340px;
   top:581px;
-  width:84px;
+  width:150px;
   height:54px;
   display:flex;
   font-size:16px;
@@ -1632,8 +1667,8 @@ body {
   position:absolute;
   left:0px;
   top:0px;
-  width:67px;
-  height:18px;
+  width:30px;
+  height:100px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   border:none;
@@ -1647,10 +1682,10 @@ body {
 #u48 {
   border-width:0px;
   position:absolute;
-  left:287px;
+  left:320px;
   top:789px;
-  width:67px;
-  height:18px;
+  width:30px;
+  height:100px;
   display:flex;
   font-size:16px;
   color:#797979;
@@ -1737,4 +1772,59 @@ body {
   word-wrap:break-word;
   text-transform:none;
 }
+
+
+
+.meter1 { 
+  position:absolute;
+  left:325px;
+  top:550px;
+  width:150px;
+  height:20px;
+  background: #F3F3F3;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.meter1 > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #B0E0E6;
+  position: relative;
+  overflow: hidden;
+}
+
+.meter2 { 
+  position:absolute;
+  left:325px;
+  top:760px;
+  width:150px;
+  height:20px;
+  background: #F3F3F3;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.meter2 > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #FF6347;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+
 
