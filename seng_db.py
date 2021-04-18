@@ -73,6 +73,21 @@ def main():
 
     conn.close()
 
+#function to format likes/dislikes
+def formatstr(string, userid):
+    original = string
+    string.strip()
+    users = string.split(" ")
+    userid = str(userid)
+
+    if userid in users:
+        return original
+    else:
+        users.append(userid)
+        new = " ".join(users)
+        return new
+
+
 #add new user details
 def newuser(firstname, lastname, email, password):
     conn = sqlite3.connect('smartbite.db')
@@ -339,6 +354,7 @@ def edit_post(postid, newcontent, authorid):
     postauthor = cur.fetchall()[0][0]
     if (postauthor != authorid):
         print("You cannot edit post")
+        return
 
     #generate new timestamp
     now = datetime.now()
@@ -356,6 +372,62 @@ def edit_post(postid, newcontent, authorid):
     conn.commit()
     conn.close()
 
+def delete_post(postid, authorid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #check if the given id is same as author
+    action = "SELECT posts.authorid from posts where posts.postid={}".format(postid)
+    cur.execute(action)
+
+    postauthor = cur.fetchall()[0][0]
+    if (postauthor != authorid):
+        print("You cannot delete post")
+        return 
+
+
+    action = "DELETE from posts where postid = {}".format(postid)
+    cur.execute(action)
+
+    action = "DELETE from comments where post_id = {}".format(postid)
+    cur.execute(action)
+
+    action = "SELECT * from posts;"
+    cur.execute(action)
+    print(cur.fetchall())
+
+    conn.commit()
+    conn.close()
+
+def post_details(postid, userid, func):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+    if (func == "like"):
+        func = "likes"
+        action = "SELECT likes from posts where postid = {}".format(postid)
+    else:
+        func = "dislikes"
+        action = "SELECT dislikes from posts where postid = {}".format(postid)
+    cur.execute(action)
+    data = cur.fetchall()
+    string = data[0][0]
+    data = ""
+
+    if string == None:
+        data = (str(userid))
+    else:
+        data = formatstr(string, userid)
+
+    action = "UPDATE posts SET {}='{}' where postid = {}".format(func,data,postid)
+    cur.execute(action)
+
+    action = "SELECT * from posts"
+    cur.execute(action)
+    print(cur.fetchall())
+
+    conn.commit()
+    conn.close()
 
 def createcomment(authorid, content, postid):
 
@@ -401,7 +473,7 @@ def editcomment(authorid, newcomment, commentid):
     commentauthor = cur.fetchall()[0][0]
     if (commentauthor != authorid):
         print("You cannot edit post")
-
+        return 
     #generate new timestamp
     now = datetime.now()
     timestamp_string = now.strftime("%d/%m/%Y %H:%M")
@@ -430,6 +502,7 @@ def deletecomment(authorid, commentid):
     commentauthor = cur.fetchall()[0][0]
     if (commentauthor != authorid):
         print("You cannot delete post")
+        return 
 
     #update timestamp
     action = "DELETE from comments where commentid = {}".format(commentid)
@@ -491,9 +564,14 @@ if __name__== "__main__":
     #addwater(0, 5)
     #print(getcalories(1))
     create_post('hello', 'hello', 0)
-    createcomment(0, "nice", 0)
-    createcomment(0, "WOW", 0)
-    deletecomment(0, 0)
+    create_post('hello', 'hello', 0)
+    #delete_post(1, 0)
+    post_details(1, 1, "like")
+    post_details(1, 2, "like")
+    post_details(1, 2, "dislike")
+    #createcomment(0, "nice", 0)
+    #createcomment(0, "WOW", 0)
+    #deletecomment(0, 0)
     #editcomment(0, "hello", 0)
     #edit_post(0, "bye", 0)
     #print(getweightleft(1))
