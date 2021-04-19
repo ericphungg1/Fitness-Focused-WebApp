@@ -95,8 +95,7 @@
           var Firstname= document.getElementById("u34_input").value;
           var Email= document.getElementById("u35_input").value;
           var Password= document.getElementById("u36_input").value;
-          var data = { fn: fname, e: Email, p: Password };
-          console.log(data)
+          var data = { fn: Firstname, e: Email, p: Password };
           $.post( "/signup", {javascript_data: JSON.stringify(data)});
         }
       </script>
