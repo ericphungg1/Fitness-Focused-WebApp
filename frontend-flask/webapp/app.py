@@ -1,4 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
+import requests
+import json
+import os
+import initdb
+import seng_db
 
 app = Flask(__name__)
 
@@ -6,9 +11,18 @@ app = Flask(__name__)
 def index():
     return render_template('sign-in.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
-    return render_template('sign-up.html')
+    if request.method == "POST":
+        jsdata = request.form['javascript_data']
+        data = json.loads(jsdata)
+        #should print in server terminal
+        print(data)
+        #call this function
+        #seng_db.newuser(firstname, lastname, email, password)
+        return
+    else:
+        return render_template('sign-up.html')
 
 @app.route('/register')
 def register():
@@ -59,4 +73,6 @@ def rewards():
     return render_template('rewards.html')
 
 if __name__ == '__main__':
+    #initialise database
+    initdb.init()
     app.run(debug=True, host='0.0.0.0')
