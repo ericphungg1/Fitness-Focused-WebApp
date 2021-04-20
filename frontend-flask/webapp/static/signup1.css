@@ -172,7 +172,7 @@ body {
   border-width:0px;
   position:absolute;
   left:131px;
-  top:571px;
+  top:600px;
   width:24px;
   height:23px;
   display:flex;
@@ -216,7 +216,7 @@ body {
   border-width:0px;
   position:absolute;
   left:130px;
-  top:619px;
+  top:630px;
   width:296px;
   height:39px;
   display:flex;
@@ -283,7 +283,7 @@ body {
   border-width:0px;
   position:absolute;
   left:160px;
-  top:572px;
+  top:600px;
   width:221px;
   height:16px;
   display:flex;
@@ -299,9 +299,11 @@ body {
   width:100%;
 }
 #u26_text {
+  position:absolute;
   border-width:0px;
   white-space:nowrap;
   text-transform:none;
+    bottom: -17px;
 }
 #u27 {
   border-width:0px;
@@ -404,6 +406,7 @@ body {
   font-family:'Roboto', sans-serif;
   font-weight:400;
   font-style:normal;
+  bottom: 10px;
 }
 #u31 {
   border-width:0px;
@@ -416,6 +419,7 @@ body {
   font-family:'Roboto', sans-serif;
   font-weight:400;
   font-style:normal;
+   bottom: 10px;
 }
 #u31 .text {
   position:absolute;
@@ -423,11 +427,14 @@ body {
   padding:0px 0px 0px 0px;
   box-sizing:border-box;
   width:100%;
+   bottom: -10px;
 }
 #u31_text {
+  position:absolute;
   border-width:0px;
   white-space:nowrap;
   text-transform:none;
+   bottom: -10px;
 }
 #u32_img {
   border-width:0px;
@@ -645,7 +652,7 @@ body {
   border-width:0px;
   position:absolute;
   left:130px;
-  top:475px;
+  top:560px;
   width:296px;
   height:32px;
   display:flex;
@@ -740,7 +747,7 @@ body {
   border-width:0px;
   position:absolute;
   left:130px;
-  top:521px;
+  top:517px;
   width:296px;
   height:32px;
   display:flex;
@@ -796,7 +803,7 @@ body {
   border-width:0px;
   position:absolute;
   left:131px;
-  top:571px;
+  top:600px;
   width:24px;
   height:23px;
   display:flex;
@@ -813,4 +820,104 @@ body {
   word-wrap:break-word;
   text-transform:none;
   visibility:hidden;
+}
+
+
+
+
+
+#lastname_input {
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:296px;
+  height:32px;
+  padding:2px 2px 2px 2px;
+  font-family:'Arial', sans-serif;
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  letter-spacing:normal;
+  color:#5CB099;
+  vertical-align:none;
+  text-align:left;
+  text-transform:none;
+  background-color:transparent;
+  border-color:transparent;
+}
+#lastname_input.disabled {
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:296px;
+  height:32px;
+  padding:2px 2px 2px 2px;
+  font-family:'Arial', sans-serif;
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  letter-spacing:normal;
+  color:#5CB099;
+  vertical-align:none;
+  text-align:left;
+  text-transform:none;
+  background-color:transparent;
+  border-color:transparent;
+}
+#lastname_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:296px;
+  height:32px;
+  background:inherit;
+  background-color:rgba(222, 233, 237, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(222, 233, 237, 1);
+  border-radius:10px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  color:#5CB099;
+}
+#lastname {
+  border-width:0px;
+  position:absolute;
+  left:130px;
+  top:475px;
+  width:296px;
+  height:32px;
+  display:flex;
+  color:#5CB099;
+}
+#lastname .text {
+  position:absolute;
+  align-self:center;
+  padding:2px 2px 2px 2px;
+  box-sizing:border-box;
+  width:100%;
+}
+#lastname_div.disabled {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:296px;
+  height:32px;
+  background:inherit;
+  background-color:rgba(240, 240, 240, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(222, 233, 237, 1);
+  border-radius:10px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  color:#5CB099;
+}
+#lastname.disabled {
 }
