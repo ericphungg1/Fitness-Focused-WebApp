@@ -13,7 +13,7 @@ def sendemail():
     email = smtplib.SMTP('smtp.gmail.com', 587) 
     email.starttls() 
     email.login("sengsmartbite@gmail.com", "ILOVESENG") 
-    message = "Your voucherID is 20001"
+    message = "Claim your Free Gym Gear Voucher at www.smartbite.com. Your voucherID is 20001."
     email.sendmail("sengsmartbite@gmail.com", "sengsmartbite@gmail.com", message) 
     email.quit()
 
