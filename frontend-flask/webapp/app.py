@@ -1,9 +1,5 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 import requests
-import json
-import os
-import initdb
-import seng_db
 
 app = Flask(__name__)
 
@@ -76,6 +72,33 @@ def recommendedrec():
 @app.route('/rewards')
 def rewards():
     return render_template('rewards.html')
+
+@app.route('/caloriecounter/nutrition<food>')
+def get_nutrition(food):
+    return nutrition(food)
+
+def nutrition(food):
+    payload = {
+        "appId": 'e4d96968',
+        "appKey": '4c9e97e39eafccbbf4d2fe28d3deec81',
+        "fields": [
+            "item_name",
+            "nf_calories",
+            "nf_sodium",
+        ],
+        "min_score": 0.5,
+        "offset": 0,
+        "limit": 1,
+        "query": food,
+    }
+    res = requests.post('https://api.nutritionix.com/v1_1/search', data=payload)
+    res = res.json()
+    response = {
+        "name": res["hits"][0]["fields"]["item_name"],
+        "calories": res["hits"][0]["fields"]["nf_calories"],
+        "sodium": res["hits"][0]["fields"]["nf_sodium"],
+    }
+    return response
 
 if __name__ == '__main__':
     #initialise database

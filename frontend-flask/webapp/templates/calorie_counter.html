@@ -438,7 +438,11 @@
       <!-- Unnamed (Text Field) -->
       <div id="u233" class="ax_default text_field">
         <div id="u233_div" class=""></div>
-        <input id="u233_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Food search" class="u233_input"/>
+        <!--<input id="u233_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Food search" class="u233_input"/>-->
+        <form action = "http://0.0.0.0:5000/caloriecounter/nutrition">
+          <label for="fname">Search Food:</label>
+          <input type="text" id="u233_input" name="food">
+        </form>
       </div>
 
       <!-- Unnamed (Shape) -->
