@@ -107,7 +107,7 @@
           var Gender= document.getElementById("u48_input").value;
           var Curweight= document.getElementById("u47_input").value;
           var Goalweight= document.getElementById("u49_input").value;
-          var data = { age: Age, height: Height, gender: Gender, cw: CurrentWeight, gw: Goalweight};
+          var data = { age: Age, height: Height, gender: Gender, cw: Curweight, gw: Goalweight};
           $.post( "/register", {javascript_data: JSON.stringify(data)});
         }
       </script>
