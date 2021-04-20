@@ -57,6 +57,10 @@ def register():
 def calcount():
     return render_template('calorie_counter.html')
 
+@app.route('/welcome')
+def success():
+    return render_template('success.html')
+
 @app.route('/forum')
 def forum():
     return render_template('community-forum.html')
@@ -82,7 +86,7 @@ def homepage():
         if "w" in data:
             weight = (data['w'].replace('\xa0', '')).strip()
             print(weight)
-            # add weight to db
+            seng_db.addweight(int(weight))
         if "cal" in data:
             calories = (data['cal'].replace('\xa0', '')).strip()
             print(calories)
@@ -90,15 +94,16 @@ def homepage():
         if "wat" in data:
             water = (data['wat'].replace('\xa0', '')).strip()
             print(water)
+            seng_db.addwater(int(water))
             #add water to db
         return ""
      else:
-        return render_template('home-page.html')
-
-
-@app.route('/getmethod/<jsdata>')
-def get_python_data():
-    return json.dumps(sengdb.get)
+        currentweight=seng_db.getcurrentweight(seng_db.activeUserid)
+        goalwei=seng_db.getgoalweight(seng_db.activeUserid)
+        weileft=seng_db.getweightleft(seng_db.activeUserid)
+        watleft=seng_db.getwater(seng_db.activeUserid)
+        percentweight=seng_db.weightprog(seng_db.activeUserid)
+        return render_template('home-page.html', currweight = currentweight, goalweight = goalwei, weightleft = weileft, waterleft = watleft, weightpercent = percentweight )
 
 @app.route('/createpost')
 def createpost():

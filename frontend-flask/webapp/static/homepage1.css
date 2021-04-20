@@ -1350,7 +1350,7 @@ body {
   border-width:0px;
   position:absolute;
   left:340px;
-  top:581px;
+  top:600px;
   width:150px;
   height:54px;
   display:flex;
@@ -1718,8 +1718,8 @@ body {
 #u48 {
   border-width:0px;
   position:absolute;
-  left:340px;
-  top:792px;
+  left:320px;
+  top:820px;
   width:30px;
   height:100px;
   display:flex;
@@ -1973,7 +1973,7 @@ body {
 #weight {
   border-width:0px;
   position:absolute;
-  left:300px;
+  left:320px;
   top:290px;
   width:75px;
   height:29px;
@@ -2012,7 +2012,7 @@ body {
 #goal {
   border-width:0px;
   position:absolute;
-  left:700px;
+  left:720px;
   top:290px;
   width:75px;
   height:29px;

@@ -181,13 +181,14 @@
 
       <!-- Unnamed (Group) -->
       <div class="meter">
-        <span style="width: 75%"></span>
+        <span style="width: {{ weightpercent }}%"></span>
       </div>
+      
       <!-- Unnamed (Rectangle) -->
         <div id="u20" class="ax_default label">
           <div id="u20_div" class=""></div>
           <div id="u20_text" class="text ">
-            <p><span>&nbsp;&nbsp;&nbsp; You are "X"% away from your goal weight &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+            <p><span>&nbsp;&nbsp;&nbsp; You are {{ weightleft }}kgs away from your goal weight &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
           </div>
         </div>
          
@@ -245,7 +246,7 @@
         <div id="u36" class="ax_default label">
           <div id="u36_div" class=""></div>
           <div id="u36_text" class="text ">
-            <p><span>You have "X" glasses of left to drink </span></p>
+            <p><span>You have {{ waterleft }} glasses of left to drink </span></p>
           </div>
         </div>
 
@@ -312,12 +313,7 @@
         </div>
       </div>
       
-       <div id="updatecal" onclick="updateCal()" class="ax_default flow_shape">
-        <div id="updatecal_div" class=""></div>
-        <div id="updatecal_text" class="text ">
-          <p><span>Update</span></p>
-        </div>
-      </div>
+      
 
       <script>
         function updateCal(){
@@ -337,21 +333,22 @@
         <div id="u48" class="ax_default label">
           <div id="u48_div" class=""></div>
           <div id="u48_text" class="text ">
-            <p><span>You have eaten "X" calories </span></p>
+            <p><span>You have yet to eat all your calories </span></p>
           </div> 
         </div>
 
          <div id="weight" class="ax_default label">
           <div id="weight_div" class=""></div>
           <div id="weight_text" class="text ">
-            <p style="font-size:12px";><span>"STARTWEIGHT" kgs</span>
+            <p style="font-size:12px";>{{ currweight }} kg</p>
           </div>
         </div>
+        
 
         <div id="goal" class="ax_default label">
           <div id="goal_div" class=""></div>
           <div id="goal_text" class="text ">
-            <p style="font-size:12px";><span>"GOALWEIGHT" kgs</span>
+            <p style="font-size:12px";>{{ goalweight }} kg</p>
           </div>
         </div>
 
@@ -361,11 +358,7 @@
         <input id="waterinput_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " class="waterinput_input"/>
       </div>
 
-       <!-- Unnamed (Text Field) -->
-      <div id="calinput" class="ax_default text_field">
-        <div id="calinput_div" class=""></div>
-        <input id="calinput_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " class="calinput_input"/>
-      </div>
+
 
         <div id="timer1" class="ax_default label">
           <div id="timer1_div" class=""></div>

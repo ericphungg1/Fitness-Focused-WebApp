@@ -2,6 +2,7 @@ import sqlite3,sys,os
 from datetime import datetime
 
 activeUserid = None
+beginWeight = None
 
 #function to format likes/dislikes, followers/following
 def formatstr(string, userid):
@@ -88,10 +89,27 @@ def registeruser(userid, age, height, gender, currentweight, goalweight):
     action = "SELECT * from user;"
     cur.execute(action)
 
+        #generate user id
+    action = "SELECT MAX(currentweight) from user"
+    cur.execute(action)
+    data = cur.fetchall()
+
+    ##if there are no values
+    if (data[0][0] == None):
+        currentweight = 0
+    else:
+        currentweight = data[0][0] + 1
+
+    #set the active user id
+    global beginWeight
+    beginWeight = currentweight    
+
     #prints the tuples
     print(cur.fetchall())
     conn.commit()
     conn.close()
+
+
 
 #login user
 def login(email, password):
@@ -162,6 +180,40 @@ def getweightleft(userid):
 
     return abs(currentweight - goalweight)
 
+def getcurrentweight(userid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the currentweight, goalweight
+    action = "SELECT user.currentweight from user where user.userid = {}".format(userid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    currentweight = data[0][0]
+    conn.close()
+
+    return currentweight
+
+def getgoalweight(userid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the currentweight, goalweight
+    action = "SELECT user.goalweight from user where user.userid = {}".format(userid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    goalweight = data[0][0]
+    conn.close()
+
+    return goalweight
+
+def addweight(weight):
+    global beginWeight
+    beginWeight = weight
+
 def addwater(userid, glasses):
     conn = sqlite3.connect('smartbite.db')
     cur = conn.cursor()
@@ -200,6 +252,44 @@ def getwater(userid):
         return 0
     else:
         return (watergoal - waterconsumed)
+    
+def weightprog(userid):
+
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the currentweight, goalweight
+    action = "SELECT user.currentweight, user.goalweight from user where user.userid = {}".format(userid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    currentweight = data[0][0]
+    goalweight = data[0][1]
+    conn.close()
+
+    finalprog = (goalweight/beginWeight) * 100
+    
+    return finalprog
+    
+    
+def waterprog(userid):
+    conn = sqlite3.connect('smartbite.db')
+    cur = conn.cursor()
+
+    #get the currentweight, goalweight
+    action = "SELECT watergoal, waterconsumed from consumption where user_id = {}".format(userid)
+    cur.execute(action)
+    data = cur.fetchall()
+
+    watergoal = data[0][0]
+    waterconsumed = data[0][1]
+    conn.close()
+
+    if waterconsumed == 0:
+        return 0
+    else:
+        return (waterconsumed / watergoal)
+    
 
 def addcalories(userid, calories):
     conn = sqlite3.connect('smartbite.db')
