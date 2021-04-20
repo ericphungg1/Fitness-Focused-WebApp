@@ -77,8 +77,9 @@ def recommendedrec():
 def rewards():
     return render_template('rewards.html')
 
-@app.route('/caloriecounter/nutrition<food>')
-def get_nutrition(food):
+@app.route('/caloriecounter/nutrition')
+def get_nutrition():
+    food = request.args.get('food')
     return nutrition(food)
 
 def nutrition(food):
@@ -92,15 +93,27 @@ def nutrition(food):
         ],
         "min_score": 0.5,
         "offset": 0,
-        "limit": 1,
+        "limit": 3,
         "query": food,
     }
     res = requests.post('https://api.nutritionix.com/v1_1/search', data=payload)
     res = res.json()
     response = {
-        "name": res["hits"][0]["fields"]["item_name"],
-        "calories": res["hits"][0]["fields"]["nf_calories"],
-        "sodium": res["hits"][0]["fields"]["nf_sodium"],
+        "item1":{
+            "name": res["hits"][0]["fields"]["item_name"],
+            "calories": res["hits"][0]["fields"]["nf_calories"],
+            "sodium": res["hits"][0]["fields"]["nf_sodium"],
+        },
+        "item2":{
+            "name": res["hits"][1]["fields"]["item_name"],
+            "calories": res["hits"][1]["fields"]["nf_calories"],
+            "sodium": res["hits"][1]["fields"]["nf_sodium"],
+        },
+        "item3":{
+            "name": res["hits"][2]["fields"]["item_name"],
+            "calories": res["hits"][2]["fields"]["nf_calories"],
+            "sodium": res["hits"][2]["fields"]["nf_sodium"],
+        },
     }
     return response
 
