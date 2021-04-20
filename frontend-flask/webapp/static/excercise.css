@@ -1039,7 +1039,7 @@ body {
   border-width:0px;
   position:absolute;
   left:470px;
-  top:331px;
+  top:260px;  
   width:300px;
   height:90px;
   display:flex;
@@ -1081,7 +1081,7 @@ body {
   border-width:0px;
   position:absolute;
   left:470px;
-  top:278px;
+  top:200px;
   width:217px;
   height:24px;
   display:flex;
@@ -1127,7 +1127,7 @@ body {
   border-width:0px;
   position:absolute;
   left:486px;
-  top:587px;
+  top: 500px;
   width:233px;
   height:24px;
   display:flex;
@@ -1169,8 +1169,8 @@ body {
   border-width:0px;
   position:absolute;
   left:486px;
-  top:634px;
-  width:300px;
+  top:570px;
+  width:290px;
   height:90px;
   display:flex;
   color:#AAAAAA;
