@@ -18,20 +18,40 @@ def signup():
         data = json.loads(jsdata)
         #should print in server terminal
         firstname = (data['fn'].replace('\xa0', '')).strip()
+        lastname = (data['ln'].replace('\xa0', '')).strip()
         email = (data['e'].replace('\xa0', '')).strip()
         password = (data['p'].replace('\xa0', '')).strip()
         print(firstname)
+        print(lastname)
         print(email)
         print(password)
         #call this function
-        #seng_db.newuser(firstname, lastname, email, password)
+        seng_db.newuser(firstname, lastname, email, password)
         return
     else:
         return render_template('sign-up.html')
 
-@app.route('/register')
+@app.route('/register', methods=['POST', 'GET'])
 def register():
-    return render_template('registration.html')
+    if request.method == "POST":
+        jsdata = request.form['javascript_data']
+        data = json.loads(jsdata)
+        #should print in server terminal
+        age = (data['age'].replace('\xa0', '')).strip()
+        height = (data['height'].replace('\xa0', '')).strip()
+        gender = (data['gender'].replace('\xa0', '')).strip()
+        currentweight = (data['cw'].replace('\xa0', '')).strip()
+        goalweight = (data['gw'].replace('\xa0', '')).strip()
+        print(age)
+        print(height)
+        print(gender)
+        print(currentweight)
+        print(goalweight)
+        #call this function
+        seng_db.registeruser(seng_db.activeUserid, int(age), int(height), gender, int(currentweight), int(goalweight))
+        return
+    else:
+        return render_template('registration.html')
 
 @app.route('/caloriecounter')
 def calcount():
