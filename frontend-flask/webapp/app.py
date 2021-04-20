@@ -7,6 +7,15 @@ import seng_db
 import urllib.request
 import re
 app = Flask(__name__)
+import smtplib 
+
+def sendemail():
+    email = smtplib.SMTP('smtp.gmail.com', 587) 
+    email.starttls() 
+    email.login("sengsmartbite@gmail.com", "ILOVESENG") 
+    message = "Your voucherID is 20001"
+    email.sendmail("sengsmartbite@gmail.com", "sengsmartbite@gmail.com", message) 
+    email.quit()
 
 def webscrape():
     url = "https://greatist.com/fitness/50-bodyweight-exercises-you-can-do-anywhere#core"
@@ -111,9 +120,12 @@ def recommendedex():
 def recommendedrec():
     return render_template('recommended-recipes.html')
 
-@app.route('/rewards')
+@app.route('/rewards', methods=['POST', 'GET'])
 def rewards():
-    return render_template('rewards.html')
+    if request.method == "POST":
+        sendemail()
+    else:
+        return render_template('rewards.html')
 
 if __name__ == '__main__':
     #initialise database
