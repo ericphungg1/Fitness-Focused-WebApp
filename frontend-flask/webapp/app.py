@@ -17,7 +17,12 @@ def signup():
         jsdata = request.form['javascript_data']
         data = json.loads(jsdata)
         #should print in server terminal
-        print(data)
+        firstname = (data['fn'].replace('\xa0', '')).strip()
+        email = (data['e'].replace('\xa0', '')).strip()
+        password = (data['p'].replace('\xa0', '')).strip()
+        print(firstname)
+        print(email)
+        print(password)
         #call this function
         #seng_db.newuser(firstname, lastname, email, password)
         return
