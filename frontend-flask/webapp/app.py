@@ -59,11 +59,25 @@ def homepage():
         jsdata = request.form['javascript_data']
         data = json.loads(jsdata)
         #should print in server terminal
-        weight = (data['w'].replace('\xa0', '')).strip()
-        print(weight)
+        if "w" in data:
+            weight = (data['w'].replace('\xa0', '')).strip()
+            print(weight)
+            # add weight to db
+        if "cal" in data:
+            calories = (data['cal'].replace('\xa0', '')).strip()
+            print(calories)
+            #add cals to db
+        if "wat" in data:
+            water = (data['wat'].replace('\xa0', '')).strip()
+            print(water)
+            #add water to db
         return ""
      else:
         return render_template('home-page.html')
+
+@app.route('/getmethod/<jsdata>')
+def get_python_data():
+    return json.dumps(sengdb.get)
 
 @app.route('/personaltrainer')
 def personaltrainer():

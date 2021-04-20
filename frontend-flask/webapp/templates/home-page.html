@@ -226,6 +226,9 @@
         </div>
       </div>
 
+
+      
+
       <!-- Unnamed (Rectangle) -->
       <div id="u31" class="ax_default flow_shape">
         <img id="u31_img" class="img " src="static/u23.svg/"/>
@@ -246,12 +249,23 @@
           </div>
         </div>
 
-         <div id="updatewater" class="ax_default flow_shape">
+         <div id="updatewater" onclick="updateWater()" class="ax_default flow_shape">
         <div id="updatewater_div" class=""></div>
         <div id="updatewater_text" class="text ">
           <p><span>Update</span></p>
         </div>
       </div>
+
+      <script>
+        function updateWater(){
+            var Water= document.getElementById("waterinput_input").value;
+            var data = { wat: Water};
+            $.post( "/homepage", {javascript_data: JSON.stringify(data)});
+            var Water= document.getElementById("waterinput_input").value = "";
+        }
+
+      </script>
+       
        
       
 
@@ -298,12 +312,22 @@
         </div>
       </div>
       
-       <div id="updatecal" class="ax_default flow_shape">
+       <div id="updatecal" onclick="updateCal()" class="ax_default flow_shape">
         <div id="updatecal_div" class=""></div>
         <div id="updatecal_text" class="text ">
           <p><span>Update</span></p>
         </div>
       </div>
+
+      <script>
+        function updateCal(){
+            var Calories= document.getElementById("calinput_input").value;
+            var data = {cal: Calories};
+            $.post( "/homepage", {javascript_data: JSON.stringify(data)});
+            var Cal= document.getElementById("calinput_input").value = "";
+        }
+      </script>
+       
 
       <!-- Unnamed (Group) -->
       <div class="meter2">
@@ -334,13 +358,13 @@
          <!-- Unnamed (Text Field) -->
       <div id="waterinput" class="ax_default text_field">
         <div id="waterinput_div" class=""></div>
-        <input id="waterinput_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (mLs)" class="waterinput_input"/>
+        <input id="waterinput_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " class="waterinput_input"/>
       </div>
 
        <!-- Unnamed (Text Field) -->
       <div id="calinput" class="ax_default text_field">
         <div id="calinput_div" class=""></div>
-        <input id="calinput_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (Cal)" class="calinput_input"/>
+        <input id="calinput_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " class="calinput_input"/>
       </div>
 
         <div id="timer1" class="ax_default label">
@@ -374,10 +398,9 @@
       <script>
         function updateWeight(){
             var Weight= document.getElementById("weightinput_input").value;
-            var data = { w: Weight };
+            var data = { w: Weight};
             $.post( "/homepage", {javascript_data: JSON.stringify(data)});
             var Weight= document.getElementById("weightinput_input").value = "";
-
         }
 
       </script>
@@ -410,6 +433,7 @@ var x = setInterval(function() {
     document.getElementById("timer1").innerHTML = "GO EXERCISE";
   }
 }, 1000);
+      
 </script>
 
 <script>
