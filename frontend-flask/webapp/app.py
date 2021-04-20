@@ -35,7 +35,26 @@ def register():
 
 @app.route('/caloriecounter')
 def calcount():
-    return render_template('calorie_counter.html')
+    food = request.args.get('food')
+    Height = request.args.get('Height')
+    Weight = request.args.get('Weight')
+    Age = request.args.get('Age')
+    Gender = request.args.get('Gender')
+    if food != None: 
+        food = nutrition(food)
+        food_name = food["item1"]["name"]
+        food_calories = food["item1"]["calories"]
+        food_sodium = food["item1"]["sodium"]
+        return render_template('calorie_counter.html', name=food_name, calories=food_calories, sodium=food_sodium)
+    elif Height != None and Weight != None:
+        BMI = Weight/(Height**2)
+        return render_template('calorie_counter.html', Gender=Gender, Height=Height, Weight=Weight, Age=Age, BMI=BMI)
+    else:
+        return render_template('calorie_counter.html')
+
+@app.route('/foodsearch')
+def foodsearch():
+    return render_template('foodsearch.html')
 
 @app.route('/forum')
 def forum():
@@ -76,11 +95,6 @@ def recommendedrec():
 @app.route('/rewards')
 def rewards():
     return render_template('rewards.html')
-
-@app.route('/caloriecounter/nutrition')
-def get_nutrition():
-    food = request.args.get('food')
-    return nutrition(food)
 
 def nutrition(food):
     payload = {

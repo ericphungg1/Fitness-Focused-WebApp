@@ -1244,7 +1244,7 @@ body {
   position:absolute;
   left:0px;
   top:0px;
-  width:45px;
+  width:62px;
   height:25px;
   background:inherit;
   background-color:rgba(92, 176, 153, 1);
@@ -1266,7 +1266,7 @@ body {
   position:absolute;
   left:457px;
   top:425px;
-  width:45px;
+  width:62px;
   height:25px;
   display:flex;
   font-family:'Roboto', sans-serif;
@@ -1291,7 +1291,7 @@ body {
   position:absolute;
   left:0px;
   top:0px;
-  width:45px;
+  width:62px;
   height:25px;
   background:inherit;
   background-color:rgba(92, 176, 153, 1);
@@ -1313,7 +1313,7 @@ body {
   position:absolute;
   left:457px;
   top:471px;
-  width:45px;
+  width:62px;
   height:25px;
   display:flex;
   font-family:'Roboto', sans-serif;
@@ -1438,7 +1438,7 @@ body {
 #u219 {
   border-width:0px;
   position:absolute;
-  left:512px;
+  left:532px;
   top:425px;
   width:63px;
   height:25px;
@@ -1465,7 +1465,7 @@ body {
   position:absolute;
   left:0px;
   top:0px;
-  width:45px;
+  width:62px;
   height:25px;
   background:inherit;
   background-color:rgba(215, 215, 215, 1);
@@ -1485,9 +1485,9 @@ body {
 #u220 {
   border-width:0px;
   position:absolute;
-  left:512px;
+  left:532px;
   top:471px;
-  width:45px;
+  width:62px;
   height:25px;
   display:flex;
   font-family:'Roboto', sans-serif;
