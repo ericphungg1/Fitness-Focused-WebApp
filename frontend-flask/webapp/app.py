@@ -79,6 +79,10 @@ def homepage():
 def get_python_data():
     return json.dumps(sengdb.get)
 
+@app.route('/createpost')
+def createpost():
+    return render_template('createpost.html')
+
 @app.route('/personaltrainer')
 def personaltrainer():
     return render_template('personal-trainer.html')
