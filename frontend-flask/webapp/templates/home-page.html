@@ -7,6 +7,7 @@
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="static/homepagedata1.css" type="text/css" rel="stylesheet"/>
     <link href="static/homepage1.css" type="text/css" rel="stylesheet"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -362,12 +363,24 @@
         <input id="weightinput_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" class="weightinput_input"/>
       </div>
 
-       <div id="updateweight" class="ax_default flow_shape">
+
+       <div id="updateweight" onclick="updateWeight()" class="ax_default flow_shape">
         <div id="updateweight_div" class=""></div>
         <div id="updateweight_text" class="text ">
           <p><span>Update Todays Weight</span></p>
         </div>
-      </div>
+      </div>  
+
+      <script>
+        function updateWeight(){
+            var Weight= document.getElementById("weightinput_input").value;
+            var data = { w: Weight };
+            $.post( "/homepage", {javascript_data: JSON.stringify(data)});
+            var Weight= document.getElementById("weightinput_input").value = "";
+
+        }
+
+      </script>
        
         
 <script>

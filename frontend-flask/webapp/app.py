@@ -53,9 +53,17 @@ def fooddiary():
 def forgotpassword():
     return render_template('forgot-password.html')
 
-@app.route('/homepage')
+@app.route('/homepage', methods=['POST', 'GET'])
 def homepage():
-    return render_template('home-page.html')
+     if request.method == "POST":
+        jsdata = request.form['javascript_data']
+        data = json.loads(jsdata)
+        #should print in server terminal
+        weight = (data['w'].replace('\xa0', '')).strip()
+        print(weight)
+        return ""
+     else:
+        return render_template('home-page.html')
 
 @app.route('/personaltrainer')
 def personaltrainer():
