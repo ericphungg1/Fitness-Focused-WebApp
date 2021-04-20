@@ -93,10 +93,17 @@
       <script>
         function myFunction(){
           var Firstname= document.getElementById("u34_input").value;
+          var Lastname = document.getElementById("lastname_input").value;
           var Email= document.getElementById("u35_input").value;
           var Password= document.getElementById("u36_input").value;
-          var data = { fn: Firstname, e: Email, p: Password };
+          var data = { fn: Firstname, ln: Lastname, e: Email, p: Password };
           $.post( "/signup", {javascript_data: JSON.stringify(data)});
+        }
+      </script>
+      
+      <script>
+        function removetext(fieldname){
+          var Name= document.getElementById(fieldname).value = "";
         }
       </script>
 
@@ -159,25 +166,25 @@
       </div>
 
       <!-- Unnamed (Text Field) -->
-      <div id="u34" class="ax_default text_field">
+      <div id="u34" onclick="removetext('u34_input')" class="ax_default text_field">
         <div id="u34_div" class=""></div>
         <input id="u34_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; First Name" class="u34_input"/>
       </div>
 
        <!-- Unnamed (Text Field) -->
-      <div id="lastname" class="ax_default text_field">
+      <div id="lastname" onclick="removetext('lastname_input')" class="ax_default text_field">
         <div id="lastname_div" class=""></div>
         <input id="lastname_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Last Name" class="u36_input"/>
       </div>
 
       <!-- Unnamed (Text Field) -->
-      <div id="u35" class="ax_default text_field">
+      <div id="u35" onclick="removetext('u35_input')" class="ax_default text_field">
         <div id="u35_div" class=""></div>
         <input id="u35_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Email" class="u35_input"/>
       </div>
 
       <!-- Unnamed (Text Field) -->
-      <div id="u36" class="ax_default text_field">
+      <div id="u36" onclick="removetext('u36_input')" class="ax_default text_field">
         <div id="u36_div" class=""></div>
         <input id="u36_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Password" class="u36_input"/>
       </div>
