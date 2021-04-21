@@ -7,7 +7,7 @@
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="static/rewardsdata.css" type="text/css" rel="stylesheet"/>
     <link href="static/rewards.css" type="text/css" rel="stylesheet"/>
-    <script src="resources/scripts/jquery-3.2.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
     <script src="resources/scripts/axutils.js"></script>
@@ -144,7 +144,7 @@
       <div id="u245" class="ax_default flow_shape">
         <div id="u245_div" class=""></div>
         <div id="u245_text" class="text ">
-          <p><span>Time Limit&nbsp; 00:05:19</span></p>
+          <p><span>Expires&nbsp; 5/02/22</span></p>
         </div>
       </div>
 
@@ -157,7 +157,7 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u247" class="ax_default flow_shape">
+      <div id="u247" onclick="myFunction()" class="ax_default flow_shape">
         <div id="u247_div" class=""></div>
         <div id="u247_text" class="text ">
           <p><span>Redeem</span></p>
@@ -208,7 +208,7 @@
       <div id="u253" class="ax_default flow_shape">
         <div id="u253_div" class=""></div>
         <div id="u253_text" class="text ">
-          <p><span>Time Limit&nbsp; 00:05:19</span></p>
+          <p><span>Expires&nbsp; 5/02/22</span></p>
         </div>
       </div>
 
@@ -240,9 +240,25 @@
       <div id="u257" class="ax_default flow_shape">
         <div id="u257_div" class=""></div>
         <div id="u257_text" class="text ">
-          <p><span>200 Points</span></p>
+          <p><span>800 Points</span></p>
         </div>
       </div>
+
+      <script>
+        function myFunction(){
+          changeredeem()
+          var content = document.getElementById("u257_text");
+          content.textContent = "400 points"
+          data = {message: "sendemail"}
+          $.post( "/rewards", {javascript_data: JSON.stringify(data)});
+        }
+      </script>
+      <script>
+        function changeredeem(){
+          var content = document.getElementById("u247_text");
+          content.textContent = "Redeemed"
+        }
+      </script>
 
       <!-- Unnamed (Ellipse) -->
       <div id="u258" class="ax_default ellipse">

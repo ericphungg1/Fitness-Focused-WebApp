@@ -4,8 +4,35 @@ import json
 import os
 import initdb
 import seng_db
-
+import urllib.request
+import re
 app = Flask(__name__)
+import smtplib 
+
+def sendemail():
+    email = smtplib.SMTP('smtp.gmail.com', 587) 
+    email.starttls() 
+    email.login("sengsmartbite@gmail.com", "ILOVESENG") 
+    message = "Claim your Free Gym Gear Voucher at www.smartbite.com. Your voucherID is 20001."
+    email.sendmail("sengsmartbite@gmail.com", "sengsmartbite@gmail.com", message) 
+    email.quit()
+
+def webscrape():
+    url = "https://greatist.com/fitness/50-bodyweight-exercises-you-can-do-anywhere#core"
+    page = urllib.request.urlopen(url)
+    html = page.read().decode("utf-8")
+    start_index1 = html.find("<li>Stand with your feet parallel or turned out 15 degrees — whatever is most comfortable.</li>")
+    end_index1 = html.find("<li>Make sure your heels do not rise off the floor.</li>")
+    squats = html[start_index1:end_index1]
+    squats= re.sub("<(li|/li|/ol|ol)>", "", squats)
+    squats = squats.replace(".", ". ")
+
+    start_index2 = html.find("<li>Find a step or bench.</li>")
+    end_index2 = html.find("<li>Repeat, aiming for 10—12 reps on each side.</li>")
+    cardio = html[start_index2:end_index2]
+    cardio= re.sub("<(li|/li|/ol|ol)>", "", cardio)
+    cardio = cardio.replace(".", ". ")
+    return squats, cardio
 
 @app.route('/')
 def index():
@@ -123,15 +150,18 @@ def profile():
 
 @app.route('/recommendedexcercise')
 def recommendedex():
-    return render_template('recommended-exercise.html')
+    return render_template('recommended-exercise.html', webscrapedata = webscrape())
 
 @app.route('/recommenderecipes')
 def recommendedrec():
     return render_template('recommended-recipes.html')
 
-@app.route('/rewards')
+@app.route('/rewards', methods=['POST', 'GET'])
 def rewards():
-    return render_template('rewards.html')
+    if request.method == "POST":
+        sendemail()
+    else:
+        return render_template('rewards.html')
 
 if __name__ == '__main__':
     #initialise database
