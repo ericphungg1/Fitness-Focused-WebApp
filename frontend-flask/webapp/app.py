@@ -159,10 +159,6 @@ def createpost():
 def personaltrainer():
     return render_template('personal-trainer.html')
 
-@app.route('/foodsearch')
-def foodsearch():
-    return render_template('foodsearch.html')
-
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
