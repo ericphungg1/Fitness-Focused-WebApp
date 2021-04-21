@@ -94,8 +94,7 @@ def homepage():
         if "wat" in data:
             water = (data['wat'].replace('\xa0', '')).strip()
             print(water)
-            seng_db.addwater(int(water))
-            #add water to db
+            seng_db.addwater(seng_db.activeUserid, int(water))
         return ""
      else:
         currentweight=seng_db.getcurrentweight(seng_db.activeUserid)
@@ -103,7 +102,8 @@ def homepage():
         weileft=seng_db.getweightleft(seng_db.activeUserid)
         watleft=seng_db.getwater(seng_db.activeUserid)
         percentweight=seng_db.weightprog(seng_db.activeUserid)
-        return render_template('home-page.html', currweight = currentweight, goalweight = goalwei, weightleft = weileft, waterleft = watleft, weightpercent = percentweight )
+        percentwater=seng_db.waterprog(seng_db.activeUserid)
+        return render_template('home-page.html', currweight = currentweight, goalweight = goalwei, weightleft = weileft, waterleft = watleft, weightpercent = percentweight, waterpercent = percentwater )
 
 @app.route('/createpost')
 def createpost():

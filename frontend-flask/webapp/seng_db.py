@@ -178,7 +178,7 @@ def getweightleft(userid):
     goalweight = data[0][1]
     conn.close()
 
-    return abs(currentweight - goalweight)
+    return abs(beginWeight - goalweight)
 
 def getcurrentweight(userid):
 
@@ -266,8 +266,12 @@ def weightprog(userid):
     currentweight = data[0][0]
     goalweight = data[0][1]
     conn.close()
-
-    finalprog = (goalweight/beginWeight) * 100
+    
+    
+    top = goalweight
+    bottom = beginWeight
+    
+    finalprog = (top/bottom) * 100
     
     return finalprog
     
@@ -288,7 +292,7 @@ def waterprog(userid):
     if waterconsumed == 0:
         return 0
     else:
-        return (waterconsumed / watergoal)
+        return (waterconsumed / watergoal) * 100
     
 
 def addcalories(userid, calories):
