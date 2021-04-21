@@ -165,6 +165,7 @@
 
                <a href="/foodsearch"> 
               <!-- Unnamed (Rectangle) -->
+              <a href="/foodsearch">
               <div id="u198" class="ax_default flow_shape">
                 <div id="u198_div" class=""></div>
                 <div id="u198_text" class="text ">
@@ -185,7 +186,7 @@
               <div id="u200" class="ax_default flow_shape">
                 <img id="u200_img" class="img " src="static/u117.svg/">
                 <div id="u200_text" class="text ">
-                  <p><span>Remaining Calories </span></p>
+                  <p><span>Food Name </span></p>
                 </div>
               </div>
 
@@ -193,7 +194,7 @@
               <div id="u201" class="ax_default flow_shape">
                 <div id="u201_div" class=""></div>
                 <div id="u201_text" class="text ">
-                  <p><span>350</span></p>
+                  <p style="font-size:12px";>{{ name }}</p>
                 </div>
               </div>
 
@@ -263,9 +264,7 @@
             <!-- Unnamed (Rectangle) -->
             <div id="u211" class="ax_default flow_shape">
               <div id="u211_div" class=""></div>
-              <div id="u211_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
+              <div id="u211_text" class="text " style="display:none; visibility: hidden"></div>
             </div>
 
             <!-- Unnamed (Rectangle) -->
@@ -280,7 +279,7 @@
             <div id="u213" class="ax_default flow_shape">
               <div id="u213_div" class=""></div>
               <div id="u213_text" class="text ">
-                <p><span>Sugars&nbsp; </span></p>
+                <p><span>Calories&nbsp; </span></p>
               </div>
             </div>
 
@@ -288,7 +287,7 @@
             <div id="u214" class="ax_default flow_shape">
               <div id="u214_div" class=""></div>
               <div id="u214_text" class="text ">
-                <p><span>Proteins</span></p>
+                <p><span>Sodium</span></p>
               </div>
             </div>
 
@@ -304,7 +303,7 @@
             <div id="u216" class="ax_default flow_shape">
               <div id="u216_div" class=""></div>
               <div id="u216_text" class="text ">
-                <p><span>Fats</span></p>
+                <p><span>Protein</span></p>
               </div>
             </div>
 
@@ -316,7 +315,7 @@
               <img id="u217_img" class="img " src="static/u126.svg/">
 
               <div id="u217_text" class="text ">
-                <p><span>75.6</span></p>
+                <p style="font-size:15px";>{{ calories }}</p>
               </div>
             </div>
 
@@ -324,7 +323,7 @@
             <div id="u218" class="ax_default flow_shape">
               <div id="u218_div" class=""></div>
               <div id="u218_text" class="text ">
-                <p><span>30.45</span></p>
+                <pstyle="font-size:12px";>{{ sodium }}</p>
               </div>
             </div>
 
@@ -340,7 +339,7 @@
             <div id="u220" class="ax_default flow_shape">
               <div id="u220_div" class=""></div>
               <div id="u220_text" class="text ">
-                <p><span>3.4</span></p>
+                <p style="font-size:12px";>{{ sodium }}</p>
               </div>
             </div>
 
@@ -395,25 +394,37 @@
             <!-- Unnamed (Text Field) -->
             <div id="u227" class="ax_default text_field">
               <div id="u227_div" class=""></div>
-              <input id="u227_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Height" class="u227_input"/>
+              <form action = "http://0.0.0.0:5000/caloriecounter" method="get">
+                <label for="fname">Height</label>
+                <input type="text" id="u227_input" name="Height" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Height">
+              </form>
             </div>
 
             <!-- Unnamed (Text Field) -->
             <div id="u228" class="ax_default text_field">
               <div id="u228_div" class=""></div>
-              <input id="u228_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Weight" class="u228_input"/>
+              <form action = "http://0.0.0.0:5000/caloriecounter" method="get">
+                <label for="fname">Weight</label>
+                <input type="text" id="u228_input" name="Weight" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Weight">
+              </form>
             </div>
 
             <!-- Unnamed (Text Field) -->
             <div id="u229" class="ax_default text_field">
               <div id="u229_div" class=""></div>
-              <input id="u229_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Age" class="u229_input"/>
+              <form action = "http://0.0.0.0:5000/caloriecounter" method="get">
+                <label for="fname">Age</label>
+                <input type="text" id="u229_input" name="Age" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Age">
+              </form>
             </div>
 
             <!-- Unnamed (Text Field) -->
             <div id="u230" class="ax_default text_field">
               <div id="u230_div" class=""></div>
-              <input id="u230_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Gender" class="u230_input"/>
+              <form action = "http://0.0.0.0:5000/caloriecounter" method="get">
+                <label for="fname">Gender</label>
+                <input type="text" id="u230_input" name="Gender" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Gender">
+              </form>
             </div>
           </div>
 
@@ -421,7 +432,7 @@
           <div id="u231" class="ax_default flow_shape">
             <div id="u231_div" class=""></div>
             <div id="u231_text" class="text ">
-              <p><span>Todays Calories</span></p>
+              <p><span>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbspTodays Calories</span></p>
             </div>
           </div>
         </div>
@@ -440,7 +451,11 @@
       <!-- Unnamed (Text Field) -->
       <div id="u233" class="ax_default text_field">
         <div id="u233_div" class=""></div>
-        <input id="u233_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Food search" class="u233_input"/>
+        <!--<input id="u233_input" type="text" value="&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Food search" class="u233_input"/>-->
+        <form action = "http://0.0.0.0:5000/caloriecounter" method="get">
+          <label for="fname">Search Food:</label>
+          <input type="text" id="u233_input" name="food">
+        </form>
       </div>
 
       <!-- Unnamed (Shape) -->

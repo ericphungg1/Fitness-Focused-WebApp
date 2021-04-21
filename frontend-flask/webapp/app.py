@@ -82,7 +82,26 @@ def register():
 
 @app.route('/caloriecounter')
 def calcount():
-    return render_template('calorie_counter.html')
+    food = request.args.get('food')
+    Height = request.args.get('Height')
+    Weight = request.args.get('Weight')
+    Age = request.args.get('Age')
+    Gender = request.args.get('Gender')
+    if food != None: 
+        food = nutrition(food)
+        food_name = food["item1"]["name"]
+        food_calories = food["item1"]["calories"]
+        food_sodium = food["item1"]["sodium"]
+        return render_template('calorie_counter.html', name=food_name, calories=food_calories, sodium=food_sodium)
+    elif Height != None and Weight != None:
+        BMI = Weight/(Height**2)
+        return render_template('calorie_counter.html', Gender=Gender, Height=Height, Weight=Weight, Age=Age, BMI=BMI)
+    else:
+        return render_template('calorie_counter.html')
+
+@app.route('/foodsearch')
+def foodsearch():
+    return render_template('foodsearch.html')
 
 @app.route('/welcome')
 def success():
@@ -162,6 +181,41 @@ def rewards():
         sendemail()
     else:
         return render_template('rewards.html')
+
+def nutrition(food):
+    payload = {
+        "appId": 'e4d96968',
+        "appKey": '4c9e97e39eafccbbf4d2fe28d3deec81',
+        "fields": [
+            "item_name",
+            "nf_calories",
+            "nf_sodium",
+        ],
+        "min_score": 0.5,
+        "offset": 0,
+        "limit": 3,
+        "query": food,
+    }
+    res = requests.post('https://api.nutritionix.com/v1_1/search', data=payload)
+    res = res.json()
+    response = {
+        "item1":{
+            "name": res["hits"][0]["fields"]["item_name"],
+            "calories": res["hits"][0]["fields"]["nf_calories"],
+            "sodium": res["hits"][0]["fields"]["nf_sodium"],
+        },
+        "item2":{
+            "name": res["hits"][1]["fields"]["item_name"],
+            "calories": res["hits"][1]["fields"]["nf_calories"],
+            "sodium": res["hits"][1]["fields"]["nf_sodium"],
+        },
+        "item3":{
+            "name": res["hits"][2]["fields"]["item_name"],
+            "calories": res["hits"][2]["fields"]["nf_calories"],
+            "sodium": res["hits"][2]["fields"]["nf_sodium"],
+        },
+    }
+    return response
 
 if __name__ == '__main__':
     #initialise database
