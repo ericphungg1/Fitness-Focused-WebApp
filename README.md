@@ -21,5 +21,5 @@ SmartBite is a fitness and diet application that aims to address the following p
 # Prototype Implementation
 
 Deliverable One: Deliverable One contains SmartBite's problem statement, low-fidelity and high-fidelity prototypes.
-Deliverable Two: Deliverable Two contains SmartBite's software architecture and UML diagrams.\ 
+Deliverable Two: Deliverable Two contains SmartBite's software architecture and UML diagrams.
 Deliverable Five: Deliverable Five is the final report.
